@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "C:/Users/Richard/Downloads/project-website-template-master"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stdio.h": "c"
+		},
+		"liveServer.settings.multiRootWorkspaceName": ".vscode"
+	}
+}

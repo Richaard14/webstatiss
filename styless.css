@@ -109,7 +109,7 @@ nav ul li {
 }
 
 .add-to-cart {
-    background: blue;
+    background: linear-gradient(to right, #e997ff, #ce24dd);
     color: white;
     padding: 10px;
     border: none;
