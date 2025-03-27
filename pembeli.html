@@ -24,7 +24,7 @@
                 <li>Info</li>
                 <li>Kategori</li>
                 <li>Transaksi</li>
-                <li>Login</li>
+                <li><a href="login.html">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -35,7 +35,7 @@
 
     <main class="product-detail">
         <div class="product-image">
-            <img src="img/imagesproduct1.jpg" alt="Love & Letter">
+            <img id="product-img" src="img/imagesproduct1.jpg" alt="Love & Letter">
         </div>
         <div class="product-info">
             <h1>LOVE & LETTER</h1>
@@ -44,14 +44,27 @@
             <p class="new-price">Rp 250.000</p>
             <p class="stock">Stok tersedia, 16 di <span>Online</span></p>
             <p class="sold-count">92 orang telah membeli produk ini</p>
+            
+            <label for="variation">Pilih Varian:</label>
+            <select id="variation">
+                <option value="normal" data-img="img/imagesproduct1.jpg">Normal Edition</option>
+                <option value="special" data-img="img/imagesproduct2.jpg">Special Edition</option>
+            </select>
+            
             <div class="quantity">
-                <button>-</button>
-                <input type="number" value="1">
-                <button>+</button>
+                <button class="decrease">-</button>
+                <input type="number" id="quantity" value="1" min="1">
+                <button class="increase">+</button>
             </div>
+            
             <button class="add-to-cart">Tambahkan ke keranjang belanja</button>
         </div>
     </main>
+
+    <section class="order-status">
+        <h2>Status Pesanan</h2>
+        <p id="order-status">Belum ada pesanan</p>
+    </section>
 
     <section class="related-products">
         <h2>Lainnya di toko ini</h2>
@@ -84,6 +97,36 @@
         <div class="footer-text">© ASTHA LOVER Systems B.V. 2014 - 2025</div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#variation').change(function() {
+                let selectedOption = $(this).find('option:selected');
+                let newImg = selectedOption.data('img');
+                $('#product-img').attr('src', newImg);
+            });
+
+            $('.increase').click(function() {
+                let qty = parseInt($('#quantity').val());
+                $('#quantity').val(qty + 1);
+            });
+            
+            $('.decrease').click(function() {
+                let qty = parseInt($('#quantity').val());
+                if (qty > 1) {
+                    $('#quantity').val(qty - 1);
+                }
+            });
+            
+            $('.add-to-cart').click(function() {
+                let quantity = $('#quantity').val();
+                let variant = $('#variation').val();
+                let confirmOrder = confirm('Konfirmasi pesanan Anda:\nVarian: ' + variant + '\nJumlah: ' + quantity + '\nLanjutkan?');
+                if (confirmOrder) {
+                    $('#order-status').text('Pesanan: ' + variant + ' - Jumlah: ' + quantity + ' (Dalam proses)');
+                    alert('Produk berhasil ditambahkan ke keranjang!');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
